@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div class="container py-4">
+            <div class="row">
+                {% if user.is_authenticated %}
+                         <p>Hello, {{ user.username }}</p><br>
+                         <a href="{% url 'logout' %}"><button type="button">Logout</button></a><br>
+                         <div class="container">
+                             <div class="row py-4">
+                                 <a href="{% url 'upload' %}"><button type="button">Upload New File</button></a><br>
+                             </div>
+                             <div class="row py-4">
+                                 <a href="{% url 'view' %}"><button type="button">View Files</button></a><br>
+                             </div>
+                         </div>
+            	{% else %}
+                <div class="container">
+                    <div class="col-6">
+                        <h2>Login</h2>
+                        <form class="" method="post"> {% csrf_token %}
+                            <input class="form-control" type="email" name="email" placeholder="Email">
+                            <input class="form-control" type="password" name="password" placeholder="Password">
+                            <button class="btn btn-primary" type="submit">LogIn</button>
+                        </form><br>
+                        <a href="{% url 'register' %}">SignUp</a>
+                    </div>
+
+                      <br>
+                     <p><strong>-- OR --</strong></p>
+                     <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button">Login with Google</button></a><br>
+                </div>
+            	{% endif %}
+            </div>
+        </div>
+        <p> <strong>________________________________________________________________________________________________________________________________________________________</strong> </p>
+        <div class="container">
+            <h1>POSTS</h1>
+            {% for object in lists %}
+                <a href="#"><h2>{{ object.user }}</h2></a>
+                <p>{{ object.title }}</p>
+                <br><br>
+            {% endfor %}
+        </div>
+{% endblock content %}

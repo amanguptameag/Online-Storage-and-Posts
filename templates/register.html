@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container py-4">
+        <h2>Register</h2>
+        <div class="col-6">
+            {% if s %}
+                <p>{{ s }}</p>
+            {% endif %}
+            <form class="" method="post"> {% csrf_token %}
+                <input class="form-control" type="email" name="email" placeholder="Email">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password2" placeholder="Password again">
+                <button class="btn btn-primary" type="submit">SignUp</button>
+            </form><br>
+            <a href="{% url 'home' %}">LogIn</a>
+        </div>
+
+          <br>
+         <p><strong>-- OR --</strong></p>
+         <a href="{% url 'social:begin' 'google-oauth2' %}"><button type="button">Register with Google</button></a><br>
+    </div>
+
+{% endblock %}
