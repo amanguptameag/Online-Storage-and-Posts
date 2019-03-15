@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from myfile.models import Share
+from myfile.models import UploadFile, Share
 
 
 def home(request):
@@ -17,8 +17,19 @@ def home(request):
 			return redirect('home')
 		else:
 		    return redirect('register')
+
+	mypic=[]
 	lists = Share.objects.all()
-	return render(request, 'home.html', {'lists': lists})
+	for obj in lists:
+		a = UploadFile.objects.all().filter(user=obj.user, title=obj.title)
+		for i in a:
+			aa = []
+			aa.append(i.user)
+			aa.append(i.title)
+			aa.append(i.file)
+			mypic.append(aa)
+
+	return render(request, 'home.html', {'mypic': mypic,})
 
 
 def register(request):

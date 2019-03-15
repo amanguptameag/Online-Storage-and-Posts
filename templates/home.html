@@ -36,9 +36,9 @@
         <p> <strong>________________________________________________________________________________________________________________________________________________________</strong> </p>
         <div class="container">
             <h1>POSTS</h1>
-            {% for object in lists %}
-                <a href="#"><h2>{{ object.user }}</h2></a>
-                <p>{{ object.title }}</p>
+            {% for pic in mypic %}
+                <a href="{{ pic.2.url }}"><h2>{{ pic.0 }}</h2></a>
+                <p>{{ pic.1 }}</p>
                 <br><br>
             {% endfor %}
         </div>
